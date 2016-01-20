@@ -14,7 +14,8 @@
         <property name="hibernate.connection.autocommit">false</property>
         <property name="current_session_context_class">thread</property>
 
-        <mapping class="logic.Student" />
+        <mapping class="persons.Student" />
+        <mapping class="messages.TextMessage" />
 
     </session-factory>
 </hibernate-configuration>

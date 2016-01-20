@@ -70,4 +70,40 @@ public class Person {
     public void setCreated() {
         this.created = new java.sql.Timestamp(System.currentTimeMillis());
     }
+
+    public boolean isNotNull(){
+        if (user_id==0) return false;
+        if (user_login==null) return false;
+        if (password==null) return false;
+        if (user_type==0) return false;
+        return true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Person person = (Person) o;
+
+        if (getUser_id() != person.getUser_id()) return false;
+        if (getUser_type() != person.getUser_type()) return false;
+        if (getUser_login() != null ? !getUser_login().equals(person.getUser_login()) : person.getUser_login() != null)
+            return false;
+        if (getPassword() != null ? !getPassword().equals(person.getPassword()) : person.getPassword() != null)
+            return false;
+        if (!getUser_last_entered().equals(person.getUser_last_entered())) return false;
+        return getCreated() != null ? getCreated().equals(person.getCreated()) : person.getCreated() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getUser_id();
+        result = 31 * result + (getUser_login() != null ? getUser_login().hashCode() : 0);
+        result = 31 * result + (getPassword() != null ? getPassword().hashCode() : 0);
+        result = 31 * result + getUser_type();
+        result = 31 * result + getUser_last_entered().hashCode();
+        result = 31 * result + (getCreated() != null ? getCreated().hashCode() : 0);
+        return result;
+    }
 }

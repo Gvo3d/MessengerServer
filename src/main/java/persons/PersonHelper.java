@@ -10,12 +10,22 @@ public class PersonHelper {
         return instance;
     }
 
-    public boolean getNewPerson(){
-        return personsdata.add(Person.nullPerson());
+    public boolean createNewPerson(int user_id, String user_login, String password, int user_type){
+        Person tempperson = new Person();
+        tempperson.setUser_id(user_id);
+        tempperson.setUser_login(user_login);
+        tempperson.setUser_type(user_type);
+        tempperson.setPassword(password);
+        tempperson.setCreated();
+        return personsdata.add(new Person());
     }
 
-    public boolean addPerson(int user_id, String user_login, int user_type){
-        return personsdata.add(new Person(user_id, user_login, user_type));
+    public boolean addPerson(Person pers){
+        if ((pers.isNotNull())&& (!contains(pers.getUser_login()))) {
+            personsdata.add(pers);
+            return true;
+        }
+        return false;
     }
 
     public boolean removePerson(String login){
@@ -46,14 +56,7 @@ public class PersonHelper {
                 return tempPerson;
             }
         }
-        return new Person(-1, null, 0);
+        return new Person();
     }
 
-    public boolean sendPersonToDatabase(String login){
-        if (contains(login)) {
-            util.DBHelper.sendPerson(getPerson(login));
-            return true;
-        }
-        return false;
-    }
 }
